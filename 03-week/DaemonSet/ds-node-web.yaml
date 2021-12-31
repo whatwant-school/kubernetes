@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: DaemonSet
+
+metadata:
+  name: ds-labels
+
+spec:
+  selector:
+    matchLabels:
+      app: node-web
+
+  template:
+    metadata:
+      labels:
+        app: node-web
+
+    spec:
+      containers:
+      - name: node-web
+        image: whatwant/node-web:1.0
+        ports:
+        - containerPort: 8080
