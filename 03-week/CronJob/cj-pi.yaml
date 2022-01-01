@@ -8,7 +8,9 @@ spec:
   schedule: "0,15,30,45 * * * *"
 
   jobTemplate:
+
     spec:
+      backoffLimit: 3
       template:
         metadata:
           labels:
@@ -20,5 +22,3 @@ spec:
             image: perl
             command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
           restartPolicy: Never
-
-      backoffLimit: 4
