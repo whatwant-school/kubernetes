@@ -2,14 +2,17 @@ apiVersion: apps/v1
 kind: ReplicaSet
 
 metadata:
-  name: rs-labels
+  name: rs-node-web
 
 spec:
   replicas: 3
 
   selector:
-    matchLabels:
-      app: node-web
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - node-web
 
   template:
     metadata:
@@ -22,3 +25,9 @@ spec:
         image: whatwant/node-web:1.0
         ports:
         - containerPort: 8080
+
+        readinessProbe:
+          exec:
+            command:
+            - ls
+            - /var/ready

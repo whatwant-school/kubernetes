@@ -2,23 +2,23 @@ apiVersion: apps/v1
 kind: ReplicaSet
 
 metadata:
-  name: rs-labels
+  name: rs-web-v2
 
 spec:
   replicas: 3
-
   selector:
     matchLabels:
-      app: node-web
+      app: node-web-v2
 
   template:
     metadata:
       labels:
-        app: node-web
+        app: node-web-v2
 
     spec:
       containers:
       - name: node-web
-        image: whatwant/node-web:1.0
+        image: whatwant/node-web:2.0
         ports:
         - containerPort: 8080
+        imagePullPolicy: Always

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc-node
+  name: svc-node-et
 
 spec:
   type: NodePort
@@ -12,3 +12,5 @@ spec:
 
   selector:
     app: node-web
+
+  externalTrafficPolicy: Local
