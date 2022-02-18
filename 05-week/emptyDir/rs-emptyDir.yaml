@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+
+metadata:
+  name: rs-emptydir
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: ubuntu
+
+  template:
+    metadata:
+      labels:
+        app: ubuntu
+
+    spec:
+      containers:
+      - image: ubuntu:20.04
+        name: worker1
+        command: ["/bin/sleep", "3650d"]
+
+        volumeMounts:
+        - name: emptydir-demo
+          mountPath: /data/emptydir1
+
+      - image: ubuntu:20.04
+        name: worker2
+        command: ["/bin/sleep", "3650d"]
+
+        volumeMounts:
+        - name: emptydir-demo
+          mountPath: /data/emptydir2
+
+      volumes:
+      - name: emptydir-demo
+        emptyDir: {}

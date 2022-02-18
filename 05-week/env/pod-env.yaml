@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: pod-env
+
+spec:
+  containers:
+  - name: print-env
+    image: bash
+
+    env:
+    - name: FIRST
+      value: "One"
+    - name: SECOND
+      value: "Two"
+    - name: THIRD
+      value: "Three"
+
+    command: ["echo"]
+    args: ["$(FIRST), $(SECOND), $(THIRD)"]

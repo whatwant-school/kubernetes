@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+
+metadata:
+  name: pvc-local
+
+spec:
+  storageClassName: sc-local
+
+  accessModes:
+    - ReadWriteOnce
+
+  resources:
+    requests:
+      storage: 50Mi
