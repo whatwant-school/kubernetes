@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: dp-web
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: node-web
+
+  minReadySeconds: 10
+  revisionHistoryLimit: 5
+  progressDeadlineSeconds: 60
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
+
+  template:
+    metadata:
+      name: node-web
+      labels:
+        app: node-web
+
+    spec:
+      containers:
+      - image: whatwant/node-web:1.0
+        name: node-web
+
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+
+        imagePullPolicy: Always
+
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
