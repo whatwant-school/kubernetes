@@ -1,0 +1,11 @@
+apiVersion: rbac.authorization.k8c.io/v1
+kind: Role
+
+metadata:
+  namespace: whatwant
+  name: whatwant-role
+
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["deployments", "replicasets", "pods"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
