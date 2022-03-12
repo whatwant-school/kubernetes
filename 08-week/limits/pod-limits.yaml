@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: limits
+
+spec:
+  containers:
+  - image: busybox
+    command: ["dd", "if=/dev/zero", "of=/dev/null"]
+
+    name: dd
+
+    resources:
+      limits:
+        cpu: 200m
+        memory: 10Mi

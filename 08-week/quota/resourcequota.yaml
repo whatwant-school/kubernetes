@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ResourceQuota
+
+metadata:
+  name: quota-all  
+
+spec:
+  scopes:
+  - BestEffort
+  - NotTerminating
+
+  hard:
+    requests.cpu: 400m
+    requests.memory: 200Mi
+    limits.cpu: 600m
+    limits.memory: 500Mi
+
+    requests.storage: 500Gi
+    standard.storageclass.storage.k8s.io/requests.storage: 1Ti
+    ssd.storageclass.storage.k8s.io/requests.storage: 300Gi
+    ssd.storageclass.storage.k8s.io/persistentvolumeclaims: 2
+
+    pods: 10
+    replicationcontrollers: 5
+    secrets: 10
+    configmaps: 10
+    persistentvolumeclaims: 5
+
+    services: 5
+    services.loadbalancers: 1
+    services.nodeports: 2

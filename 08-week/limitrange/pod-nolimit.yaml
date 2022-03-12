@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: nolimit
+
+spec:
+  containers:
+  - name: main
+    image: busybox
+    command: ["dd", "if=/dev/zero", "of=/dev/null"]
