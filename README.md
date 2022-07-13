@@ -9,4 +9,4 @@
 - Notion: https://www.notion.so/modulabs/Kubernetes-e207d47489fb4174badf0348ba8168df
 
 ## Contents
-- 1주씩 진행되면서 기존 자료가 업데이트 될 예정입니다.
+- 1주씩 진행되면서 자료가 업데이트 될 예정입니다.
