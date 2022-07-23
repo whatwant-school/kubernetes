@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: pod-error
+  labels:
+    env: trouble
+
+spec:
+  containers:
+  - image: whatwant/err-pod:1.0
+    name: pod-error

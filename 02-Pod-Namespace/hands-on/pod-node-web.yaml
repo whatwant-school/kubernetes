@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: node-web
+  labels:
+    creation_method: manual
+    env: stage
+
+spec:
+  containers:
+  - image: whatwant/node-web:1.0
+    name: node-web
+    ports:
+    - containerPort: 8080
+      protocol: TCP
