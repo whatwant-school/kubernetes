@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: CronJob
+
+metadata:
+  name: cj-history-3
+
+spec:
+  schedule: "*/1 * * * *"
+  
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+
+  jobTemplate:
+
+    spec:
+      backoffLimit: 3
+      template:
+        metadata:
+          labels:
+            app: history-3
+
+        spec:
+          containers:
+          - name: pi
+            image: perl:5.34.1
+            command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+          restartPolicy: Never
