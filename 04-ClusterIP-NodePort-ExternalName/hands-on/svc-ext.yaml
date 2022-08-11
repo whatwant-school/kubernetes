@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: svc-ext
+
+spec:
+  type: ExternalName
+  externalName: google.com
