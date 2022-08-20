@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+
+metadata:
+  name: rs-web-v1
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: node-web-v1
+
+  template:
+    metadata:
+      labels:
+        app: node-web-v1
+
+    spec:
+      containers:
+      - name: node-web
+        image: whatwant/node-web:1.0
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always

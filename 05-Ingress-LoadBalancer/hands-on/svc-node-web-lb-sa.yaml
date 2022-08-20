@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-lb-sa
+
+spec:
+  type: LoadBalancer
+
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+
+  selector:
+    app: node-web-v1
+
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 3600
