@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: pod-private
+  labels:
+    app: nginx
+
+spec:
+  containers:
+  - name: nginx
+    image: whatwant/simple-nginx:v0.1
+
+  imagePullSecrets:
+    - name: my-docker-hub

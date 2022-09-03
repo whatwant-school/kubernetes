@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: pod-configmap
+  labels:
+    app: nginx   
+ 
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+
+    envFrom:
+      - configMapRef:
+          name: cm-envfrom
+
+    volumeMounts:
+    - name: nginx-volume
+      subPath: index.html
+      mountPath: /usr/share/nginx/html/index.html
+
+  volumes:
+  - name: nginx-volume
+    configMap:
+      name: cm-volume
