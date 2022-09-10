@@ -1,0 +1,5 @@
+FROM node:latest
+
+COPY ./app-1.js /app.js
+
+ENTRYPOINT ["node", "app.js"]

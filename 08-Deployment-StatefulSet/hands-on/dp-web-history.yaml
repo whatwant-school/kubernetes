@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: dp-web
+
+spec:
+  replicas: 10
+
+  selector:
+    matchLabels:
+      app: node-web
+
+  template:
+    metadata:
+      name: node-web
+      labels:
+        app: node-web
+
+    spec:
+      containers:
+      - image: whatwant/node-web:4.0
+        name: node-web
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        imagePullPolicy: Always
+
+  revisionHistoryLimit: 10
