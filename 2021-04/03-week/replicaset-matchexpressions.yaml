@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+
+metadata:
+  name: rc-expressions
+
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - kubia
+
+  template:
+    metadata:
+      labels:
+        app: kubia
+    spec:
+      containers:
+      - name: kubia
+        image: luksa/kubia
+        ports:
+        - containerPort: 8080

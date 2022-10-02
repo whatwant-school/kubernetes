@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+
+metadata:
+  name: dynamic
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubuntu
+
+  template:
+    metadata:
+      labels:
+        app: ubuntu
+
+    spec:
+      containers:
+      - image: ubuntu:20.04
+        name: worker
+        command: ["/bin/sleep", "3650d"]
+        volumeMounts:
+        - name: dynamic-demo
+          mountPath: /data/dynamic
+
+      volumes:
+        - name: dynamic-demo
+          persistentVolumeClaim:
+            claimName: local-pvc

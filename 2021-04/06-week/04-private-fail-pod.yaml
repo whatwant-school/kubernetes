@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-nginx
+  labels:
+    app: simple
+
+spec:
+  containers:
+  - name: simple
+    image: whatwant/simple-nginx:v0.1

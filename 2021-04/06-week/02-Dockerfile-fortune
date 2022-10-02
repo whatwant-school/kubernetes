@@ -1,0 +1,10 @@
+FROM ubuntu:latest
+
+RUN apt-get update
+RUN apt-get -y install fortune
+
+ADD 02-fortuneloop.sh /bin/fortuneloop.sh
+RUN chmod +x /bin/fortuneloop.sh
+
+ENTRYPOINT ["/bin/fortuneloop.sh"]
+CMD ["10"]

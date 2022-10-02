@@ -1,0 +1,5 @@
+FROM node:latest
+
+ADD 07-app.js /app.js
+
+ENTRYPOINT ["node", "app.js"]

@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: svc-ingress
+
+spec:
+  rules:
+  - host: k8s.whatwant.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /test
+        backend:
+          service:
+            name: svc-node
+            port:
+              number: 80

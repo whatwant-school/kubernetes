@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: DaemonSet
+
+metadata:
+  name: ssh-monitor
+
+spec:
+  selector:
+    matchLabels:
+      app: ssd-monitor
+
+  template:
+    metadata:
+      labels:
+        app: ssd-monitor
+
+    spec:
+      nodeSelector:
+        disk: ssd
+      containers:
+      - name: main
+        image: luksa/ssd-monitor

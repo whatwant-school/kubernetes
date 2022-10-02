@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: monitoring
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port:   '3000'
+
+## NodePort
+## 30004(node) -- 3000(svc) -- 3000(pod)
+spec:
+  selector:
+    app: grafana
+
+  type: NodePort
+
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30004

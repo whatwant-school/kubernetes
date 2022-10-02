@@ -1,0 +1,3 @@
+FROM nginx:latest
+
+COPY ./04-index.html /usr/share/nginx/html/index.html

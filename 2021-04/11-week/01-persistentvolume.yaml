@@ -1,0 +1,32 @@
+kind: List
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    name: pv-mongodb-1
+  spec:
+    capacity:
+      storage: 2Gi
+    accessModes:
+      - ReadWriteOnce
+    persistentVolumeReclaimPolicy: Recycle
+    storageClassName: mongodb-storage
+    hostPath:
+      path: /tmp/pv-1
+      type: DirectoryOrCreate
+
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    name: pv-mongodb-2
+  spec:
+    capacity:
+      storage: 2Gi
+    accessModes:
+      - ReadWriteOnce
+    persistentVolumeReclaimPolicy: Recycle
+    storageClassName: mongodb-storage
+    hostPath:
+      path: /tmp/pv-2
+      type: DirectoryOrCreate

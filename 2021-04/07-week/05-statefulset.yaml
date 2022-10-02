@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: node-web
+
+spec:
+  serviceName: node-web
+  replicas: 2
+  selector:
+    matchLabels:
+      app: node-web
+
+  template:
+    metadata:
+      labels:
+        app: node-web
+    spec:
+      containers:
+      - name: node-web
+        image: whatwant/node-web:3.0
+        ports:
+        - name: http
+          containerPort: 8080
+        volumeMounts:
+        - name: data
+          mountPath: /var/data
+
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      resources:
+        requests:
+          storage: 1Mi
+      accessModes:
+      - ReadWriteOnce

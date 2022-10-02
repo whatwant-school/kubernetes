@@ -1,0 +1,27 @@
+## Backend : kube-stats-metrice
+## Namespace : kube-system
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kube-state-metrics
+  name: kube-state-metrics
+  namespace: kube-system
+
+spec:
+  clusterIP: None
+
+## 8080 --> http-metrics (to Container Port 8080)
+  ports:
+  - name: http-metrics
+    port: 8080
+    targetPort: http-metrics
+
+## 8081 --> telemetry (to Container Port 8081)
+  - name: telemetry
+    port: 8081
+    targetPort: telemetry
+
+## To Backend pod
+  selector:
+    app: kube-state-metrics

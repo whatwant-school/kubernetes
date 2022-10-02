@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb-statefulset
+  labels:
+    app: mongodb
+    environment: test
+    replicaset: MainRepSet
+    group: mongodb
+
+spec:
+  serviceName: mongodb-service
+
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: mongodb
+      role: mongo
+      environment: test
+      replicaset: MainRepSet
+
+  template:
+    metadata:
+      labels:
+        app: mongodb
+        role: mongo
+        environment: test
+        replicaset: MainRepSet
+        group: mongodb
+
+    spec:
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: secrets-volume
+          secret:
+            secretName: mongodb-key
+            defaultMode: 256
+
+      containers:
+        - name: mongodb
+          image: mongo:4.2
+          command:
+            - "mongod"
+            - "--bind_ip"
+            - "0.0.0.0"
+            - "--replSet"
+            - "MainRepSet"
+            - "--auth"
+            - "--clusterAuthMode"
+            - "keyFile"
+            - "--keyFile"
+            - "/etc/secrets-volume/internal-auth-mongodb-keyfile"
+            - "--setParameter"
+            - "authenticationMechanisms=SCRAM-SHA-1"
+
+          ports:
+            - containerPort: 27017
+
+          volumeMounts:
+            - name: secrets-volume
+              readOnly: true
+              mountPath: /etc/secrets-volume
+
+            - name: mongodb-volumeclaim
+              mountPath: /data/db
+
+  volumeClaimTemplates:
+    - metadata:
+        name: mongodb-volumeclaim
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: mongodb-storage
+        resources:
+          requests:
+            storage: 2Gi

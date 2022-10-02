@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-loadbalancer
+
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+
+  selector:
+    app: node-web
+
+  externalTrafficPolicy: Local

@@ -1,0 +1,21 @@
+## Backend : node-exporter
+## namespace : kube-system
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: node-exporter
+  name: node-exporter
+  namespace: kube-system
+
+spec:
+  ports:
+  - name: http
+    port: 9100
+    nodePort: 31672
+    protocol: TCP
+
+  type: NodePort
+
+  selector:
+    k8s-app: node-exporter
