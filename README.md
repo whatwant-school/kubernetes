@@ -1,5 +1,5 @@
 # kubernetes Study
-자율학습조작 2023년 5월 - Kubernetes
+자율학습조직 2023년 5월 - Kubernetes
 
 - 시작일: 2023년 5월 08일
 - 종료일: 2023년 -월 --일
